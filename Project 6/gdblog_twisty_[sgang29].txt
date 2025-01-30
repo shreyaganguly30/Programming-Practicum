@@ -1,0 +1,73 @@
+➜ gdb ExploreTheTwistyLabyrinth.exe
+GNU gdb (Ubuntu 15.0.50.20240403-0ubuntu1) 15.0.50.20240403-git
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ExploreTheTwistyLabyrinth.exe...
+(gdb) b ExploreTheTwistyLabyrinth.cpp:16
+Breakpoint 1 at 0x2a54: file ExploreTheTwistyLabyrinth.cpp, line 18.
+(gdb) r
+Starting program: /usercode/ExploreTheTwistyLabyrinth.exe 
+warning: Error disabling address space randomization: Operation not permitted
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main () at ExploreTheTwistyLabyrinth.cpp:18
+18          if (isPathToFreedom(start, kPathOutOfTwistyMaze)) {
+(gdb) i locals
+m = {_vptr.Maze = 0x61ddf7071bf0 <vtable for Maze+16>, grid = {
+    _vptr.Grid = 0x61ddf7071c10 <vtable for Grid<MazeCell*>+16>, 
+    Rows = 0x61ddf80822d0, NumRows = 4}, numRows = 4, numCols = 4, 
+  kNumTwistyRooms = 12}
+start = 0x61ddf80823e0
+(gdb) p *(start)
+$1 = {whatsHere = "", north = 0x0, south = 0x61ddf8082d90, east = 0x0, 
+  west = 0x61ddf8082bc0}
+(gdb) p *(start->west)
+$2 = {whatsHere = "", north = 0x61ddf8082b70, south = 0x61ddf8082c60, 
+  east = 0x61ddf80823e0, west = 0x61ddf8082b20}
+(gdb) p *(start->west->north)
+$3 = {whatsHere = "", north = 0x0, south = 0x0, east = 0x61ddf8082bc0, 
+  west = 0x61ddf8082c60}
+(gdb) p *(start->west->north->east)
+$4 = {whatsHere = "", north = 0x61ddf8082b70, south = 0x61ddf8082c60, 
+  east = 0x61ddf80823e0, west = 0x61ddf8082b20}
+(gdb) p *(start->west->west)
+$5 = {whatsHere = "Potion", north = 0x0, south = 0x0, east = 0x61ddf8082bc0, 
+  west = 0x0}
+(gdb) p *(start->west->south)
+$6 = {whatsHere = "", north = 0x61ddf8082bc0, south = 0x61ddf8082a10, 
+  east = 0x61ddf8082cb0, west = 0x61ddf8082b70}
+(gdb) p *(start->west->south->east)
+$7 = {whatsHere = "", north = 0x0, south = 0x61ddf8082c60, east = 0x0, 
+  west = 0x0}
+(gdb) p *(start->south)
+$8 = {whatsHere = "", north = 0x61ddf8082a10, south = 0x0, 
+  east = 0x61ddf80823e0, west = 0x61ddf8082ad0}
+(gdb) p *(start->south->north)
+$9 = {whatsHere = "", north = 0x61ddf8082d90, south = 0x0, 
+  east = 0x61ddf8082c60, west = 0x61ddf8082de0}
+(gdb) p *(start->south->north->west)
+$10 = {whatsHere = "", north = 0x0, south = 0x0, east = 0x61ddf8082a10, 
+  west = 0x61ddf8082c10}
+(gdb) p *(start->south->north->west->west)
+$11 = {whatsHere = "Wand", north = 0x0, south = 0x0, east = 0x0, 
+  west = 0x61ddf8082de0}
+(gdb) p *(start->south->west)
+$12 = {whatsHere = "", north = 0x0, south = 0x0, east = 0x61ddf8082d90, 
+  west = 0x61ddf8082a80}
+(gdb) p *(start->south->west->west)
+$13 = {whatsHere = "Spellbook", north = 0x61ddf8082ad0, south = 0x0, 
+  east = 0x0, west = 0x0}
+(gdb) 
